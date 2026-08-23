@@ -1,12 +1,4 @@
 import filesystem
-import posixpath
-
-current = "/home"
-requested = "user"
-
-new_path = posixpath.join(current, requested)
-
-print(new_path)
 
 print("PDFOS v0.1")
 
