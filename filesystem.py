@@ -1,19 +1,58 @@
 import posixpath
 root = {
-    "home": {
-        "user": {}
-    },
-    "bin": {},
-    "tmp": {}
+    "name": "/",
+    "type": "directory",
+    "children": {
+        "home": {
+            "name": "home",
+            "type": "directory",
+            "children": {
+                "user": {
+                    "name": "user",
+                    "type": "directory",
+                    "children": {
+                        "hello.txt": {
+                            "name": "hello.txt",
+                            "type": "file",
+                            "content": ""
+                        }
+                    }
+                }
+            }
+        },
+        "bin": {
+            "name": "bin",
+            "type": "directory",
+            "children": {}
+        },
+        "tmp": {
+            "name": "tmp",
+            "type": "directory",
+            "children": {}
+        }
+    }
 }
+
 
 current_directory = "/"
 
 
 def ls():
     directory = get_directory(current_directory)
-    for item in directory.keys():
+    
+    for item in directory["children"].keys():
         print(item)
+
+def touch(filename):
+    directory = get_directory(current_directory) 
+    
+    children = directory["children"]
+    file = {
+        "name": filename,
+        "type": "file",
+        "content": "" 
+    }
+    children[filename] = file
         
 def get_directory(path):
     
@@ -24,7 +63,7 @@ def get_directory(path):
     current = root
     
     for part in parts:
-        current = current[part]
+        current = current["children"][part]
         
     return current
 
@@ -36,6 +75,12 @@ def change_directory(path):
 
     try:
         directory = get_directory(path)
+        if(directory["type"] == "file"):
+            print("cannot change the directory")
+            return 
+        else:
+            current_directory = path
+            
         current_directory = path
     except KeyError:
         print("Directory not found")

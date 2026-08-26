@@ -32,7 +32,10 @@ while True:
     elif command.lower().startswith("cd "):
         parts = command.split()
         filesystem.change_directory(parts[1])
-
+    elif command.lower().startswith("touch "):
+        parts = command.split()
+        filesystem.touch(parts[1])
+        
     elif command.lower() == "exit":
         print("goodbye!!")
         break
