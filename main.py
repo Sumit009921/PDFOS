@@ -35,7 +35,10 @@ while True:
     elif command.lower().startswith("touch "):
         parts = command.split()
         filesystem.touch(parts[1])
-        
+    
+    elif command.lower().startswith("cat"):
+         parts = command.split()
+         filesystem.cat(parts[1])    
     elif command.lower() == "exit":
         print("goodbye!!")
         break

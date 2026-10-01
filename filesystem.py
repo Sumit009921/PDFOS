@@ -14,7 +14,7 @@ root = {
                         "hello.txt": {
                             "name": "hello.txt",
                             "type": "file",
-                            "content": ""
+                            "content": "hie, im sumit"
                         }
                     }
                 }
@@ -84,3 +84,10 @@ def change_directory(path):
         current_directory = path
     except KeyError:
         print("Directory not found")
+        
+def cat(filename):
+    directory = get_directory(current_directory)
+    file = directory["children"][filename]
+    if file["type"] == "file":
+     print(file["content"])
+    
